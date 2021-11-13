@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <model.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -11,11 +14,19 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+public slots:
+    void displayImage(QString fileName);
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_loadButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Model *model;
+    cv::Mat img;
 };
 #endif // MAINWINDOW_H
