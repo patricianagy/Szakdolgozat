@@ -8,12 +8,12 @@
 #include <iostream>
 #include <math.h>
 
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(open_picture()));
     model = new Model();
 }
 
@@ -27,12 +27,11 @@ void MainWindow::displayImage(QString fileName)
     img = cv::imread(fileName.toStdString());
     cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
     QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
-    ui->imagePlace->setPixmap(QPixmap::fromImage(imdisplay));
+    ui->picture_display->setPixmap(QPixmap::fromImage(imdisplay));
 
 }
 
-
-void MainWindow::on_loadButton_clicked()
+void MainWindow::open_picture()
 {
     QFileDialog dialog(this);
     dialog.setNameFilter(tr("Images (*.png *.jpg)"));
@@ -41,7 +40,6 @@ void MainWindow::on_loadButton_clicked()
                                                         "C:",
                                                         tr("Images (*.png *.jpg)"));
     model ->setFileName(fileName);
-
 
 }
 

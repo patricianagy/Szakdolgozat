@@ -14,19 +14,17 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public slots:
-    void displayImage(QString fileName);
-
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-private slots:
-    void on_loadButton_clicked();
+    void displayImage(QString fileName);
 
 private:
     Ui::MainWindow *ui;
     Model *model;
     cv::Mat img;
+
+private slots:
+    void open_picture();
 };
 #endif // MAINWINDOW_H

@@ -6,75 +6,59 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
-    <height>605</height>
+    <width>1133</width>
+    <height>809</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Picture Editor</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: rgb(60, 68, 89);</string>
+   <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="imagePlace">
+   <widget class="QLabel" name="picture_display">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>40</x>
       <y>50</y>
-      <width>751</width>
-      <height>381</height>
+      <width>1051</width>
+      <height>591</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="loadButton">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>93</width>
-      <height>28</height>
+      <x>0</x>
+      <y>0</y>
+      <width>491</width>
+      <height>31</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(60, 68, 89);
-color: rgb(170, 180, 200);</string>
-    </property>
-    <property name="text">
-     <string>Load</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="saveButton">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>10</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">alternate-background-color: rgb(0, 0, 127);</string>
-    </property>
-    <property name="text">
-     <string>Save</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cancelButton">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>10</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Cancel</string>
-    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="loadButton">
+       <property name="text">
+        <string>Open image</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -82,7 +66,7 @@ color: rgb(170, 180, 200);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>798</width>
+     <width>1133</width>
      <height>26</height>
     </rect>
    </property>

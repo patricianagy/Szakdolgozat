@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -24,10 +25,12 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QLabel *imagePlace;
+    QLabel *picture_display;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout;
     QPushButton *loadButton;
-    QPushButton *saveButton;
-    QPushButton *cancelButton;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -35,29 +38,37 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(798, 605);
-        MainWindow->setStyleSheet(QString::fromUtf8("background-color: rgb(60, 68, 89);"));
+        MainWindow->resize(1133, 809);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        imagePlace = new QLabel(centralwidget);
-        imagePlace->setObjectName(QString::fromUtf8("imagePlace"));
-        imagePlace->setGeometry(QRect(20, 50, 751, 381));
-        loadButton = new QPushButton(centralwidget);
+        picture_display = new QLabel(centralwidget);
+        picture_display->setObjectName(QString::fromUtf8("picture_display"));
+        picture_display->setGeometry(QRect(40, 50, 1051, 591));
+        horizontalLayoutWidget = new QWidget(centralwidget);
+        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(0, 0, 491, 31));
+        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        loadButton = new QPushButton(horizontalLayoutWidget);
         loadButton->setObjectName(QString::fromUtf8("loadButton"));
-        loadButton->setGeometry(QRect(20, 10, 93, 28));
-        loadButton->setStyleSheet(QString::fromUtf8("background-color: rgb(60, 68, 89);\n"
-"color: rgb(170, 180, 200);"));
-        saveButton = new QPushButton(centralwidget);
-        saveButton->setObjectName(QString::fromUtf8("saveButton"));
-        saveButton->setGeometry(QRect(120, 10, 93, 28));
-        saveButton->setStyleSheet(QString::fromUtf8("alternate-background-color: rgb(0, 0, 127);"));
-        cancelButton = new QPushButton(centralwidget);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
-        cancelButton->setGeometry(QRect(220, 10, 93, 28));
+
+        horizontalLayout->addWidget(loadButton);
+
+        pushButton_2 = new QPushButton(horizontalLayoutWidget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        horizontalLayout->addWidget(pushButton_2);
+
+        pushButton = new QPushButton(horizontalLayoutWidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        horizontalLayout->addWidget(pushButton);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 798, 26));
+        menubar->setGeometry(QRect(0, 0, 1133, 26));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -70,11 +81,11 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Picture Editor", nullptr));
-        imagePlace->setText(QString());
-        loadButton->setText(QCoreApplication::translate("MainWindow", "Load", nullptr));
-        saveButton->setText(QCoreApplication::translate("MainWindow", "Save", nullptr));
-        cancelButton->setText(QCoreApplication::translate("MainWindow", "Cancel", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        picture_display->setText(QString());
+        loadButton->setText(QCoreApplication::translate("MainWindow", "Open image", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
     } // retranslateUi
 
 };
