@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <model.h>
+#include <opencv2/imgproc/imgproc.hpp>
+#include "model.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,14 +18,18 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void displayImage(QString fileName);
+    void displayImage(cv::Mat img);
 
 private:
     Ui::MainWindow *ui;
+
     Model *model;
-    cv::Mat img;
 
 private slots:
     void open_picture();
+    void save_picture();
+    void gaussBlur();
+    void setBrightness();
+    void setContrast();
 };
 #endif // MAINWINDOW_H

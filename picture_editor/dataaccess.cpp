@@ -1,24 +1,20 @@
 #include "dataaccess.h"
-#include <QFileDialog>
-#include <QTimer>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
 #include <iostream>
-#include <math.h>
 
 dataAccess::dataAccess()
 {
 
 }
 
-void dataAccess::loadPicture()
+cv::Mat dataAccess::loadPicture(QString fileName)
 {
-
+    cv::Mat img = cv::imread(fileName.toStdString());
+    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
+    return img;
 
 }
 
-void dataAccess::savePicture()
+void dataAccess::savePicture(QString fileName, cv::Mat img)
 {
-
+    cv::imwrite(fileName.toStdString(),img);
 }

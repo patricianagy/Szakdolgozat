@@ -25,12 +25,19 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QLabel *picture_display;
+    QLabel *displayImage;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *loadButton;
-    QPushButton *pushButton_2;
+    QPushButton *saveButton;
     QPushButton *pushButton;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *blurButton;
+    QPushButton *brightButton;
+    QPushButton *contrastButton;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -38,37 +45,87 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1133, 809);
+        MainWindow->resize(1298, 856);
+        MainWindow->setStyleSheet(QString::fromUtf8("\n"
+"background-color: rgb(38, 43, 61);"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        picture_display = new QLabel(centralwidget);
-        picture_display->setObjectName(QString::fromUtf8("picture_display"));
-        picture_display->setGeometry(QRect(40, 50, 1051, 591));
+        displayImage = new QLabel(centralwidget);
+        displayImage->setObjectName(QString::fromUtf8("displayImage"));
+        displayImage->setGeometry(QRect(30, 50, 1241, 621));
         horizontalLayoutWidget = new QWidget(centralwidget);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(0, 0, 491, 31));
+        horizontalLayoutWidget->setGeometry(QRect(20, 0, 481, 41));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         loadButton = new QPushButton(horizontalLayoutWidget);
         loadButton->setObjectName(QString::fromUtf8("loadButton"));
+        loadButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"background-color: rgb(71, 99, 107);\n"
+"color: rgb(12, 211, 204);"));
 
         horizontalLayout->addWidget(loadButton);
 
-        pushButton_2 = new QPushButton(horizontalLayoutWidget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        saveButton = new QPushButton(horizontalLayoutWidget);
+        saveButton->setObjectName(QString::fromUtf8("saveButton"));
+        saveButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"color: rgb(12, 211, 204);"));
 
-        horizontalLayout->addWidget(pushButton_2);
+        horizontalLayout->addWidget(saveButton);
 
         pushButton = new QPushButton(horizontalLayoutWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"color: rgb(12, 211, 204);"));
 
         horizontalLayout->addWidget(pushButton);
+
+        horizontalLayoutWidget_2 = new QWidget(centralwidget);
+        horizontalLayoutWidget_2->setObjectName(QString::fromUtf8("horizontalLayoutWidget_2"));
+        horizontalLayoutWidget_2->setGeometry(QRect(260, 750, 811, 41));
+        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        blurButton = new QPushButton(horizontalLayoutWidget_2);
+        blurButton->setObjectName(QString::fromUtf8("blurButton"));
+        blurButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"color: rgb(12, 211, 204);"));
+
+        horizontalLayout_2->addWidget(blurButton);
+
+        brightButton = new QPushButton(horizontalLayoutWidget_2);
+        brightButton->setObjectName(QString::fromUtf8("brightButton"));
+        brightButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"color: rgb(12, 211, 204);"));
+
+        horizontalLayout_2->addWidget(brightButton);
+
+        contrastButton = new QPushButton(horizontalLayoutWidget_2);
+        contrastButton->setObjectName(QString::fromUtf8("contrastButton"));
+        contrastButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"color: rgb(12, 211, 204);"));
+
+        horizontalLayout_2->addWidget(contrastButton);
+
+        pushButton_3 = new QPushButton(horizontalLayoutWidget_2);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"color: rgb(12, 211, 204);"));
+
+        horizontalLayout_2->addWidget(pushButton_3);
+
+        pushButton_2 = new QPushButton(horizontalLayoutWidget_2);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"color: rgb(12, 211, 204);"));
+
+        horizontalLayout_2->addWidget(pushButton_2);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1133, 26));
+        menubar->setGeometry(QRect(0, 0, 1298, 26));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -81,11 +138,16 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        picture_display->setText(QString());
-        loadButton->setText(QCoreApplication::translate("MainWindow", "Open image", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Picture editor\360\237\216\250", nullptr));
+        displayImage->setText(QString());
+        loadButton->setText(QCoreApplication::translate("MainWindow", "Open\360\237\223\202", nullptr));
+        saveButton->setText(QCoreApplication::translate("MainWindow", "Save\360\237\222\276", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        blurButton->setText(QCoreApplication::translate("MainWindow", "Blur", nullptr));
+        brightButton->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
+        contrastButton->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
     } // retranslateUi
 
 };

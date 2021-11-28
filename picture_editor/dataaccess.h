@@ -4,14 +4,14 @@
 #include <QString>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include "model.h"
+#include <opencv2/imgproc/imgproc.hpp>
 
 class dataAccess
 {
 public:
     dataAccess();
-    void loadPicture();
-    void savePicture();
+    cv::Mat loadPicture(QString fileName);
+    void savePicture(QString fileName, cv::Mat img);
 };
 
 #endif // DATAACCESS_H

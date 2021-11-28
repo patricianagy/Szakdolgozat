@@ -10,13 +10,19 @@ CONFIG += c++11
 
 
 SOURCES += \
+    brightness.cpp \
+    contrast.cpp \
     dataaccess.cpp \
+    gaussblur.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp
 
 HEADERS += \
+    brightness.h \
+    contrast.h \
     dataaccess.h \
+    gaussblur.h \
     mainwindow.h \
     model.h
 

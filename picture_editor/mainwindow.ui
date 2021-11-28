@@ -6,21 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1133</width>
-    <height>809</height>
+    <width>1298</width>
+    <height>856</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Picture editor🎨</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+background-color: rgb(38, 43, 61);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="picture_display">
+   <widget class="QLabel" name="displayImage">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>30</x>
       <y>50</y>
-      <width>1051</width>
-      <height>591</height>
+      <width>1241</width>
+      <height>621</height>
      </rect>
     </property>
     <property name="text">
@@ -30,29 +34,109 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>20</x>
       <y>0</y>
-      <width>491</width>
-      <height>31</height>
+      <width>481</width>
+      <height>41</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="loadButton">
+       <property name="styleSheet">
+        <string notr="true">border-color: rgb(12, 211, 204);
+background-color: rgb(71, 99, 107);
+color: rgb(12, 211, 204);</string>
+       </property>
        <property name="text">
-        <string>Open image</string>
+        <string>Open📂</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="saveButton">
+       <property name="styleSheet">
+        <string notr="true">border-color: rgb(12, 211, 204);
+color: rgb(12, 211, 204);</string>
+       </property>
+       <property name="text">
+        <string>Save💾</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">border-color: rgb(12, 211, 204);
+color: rgb(12, 211, 204);</string>
+       </property>
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>750</y>
+      <width>811</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="blurButton">
+       <property name="styleSheet">
+        <string notr="true">border-color: rgb(12, 211, 204);
+color: rgb(12, 211, 204);</string>
+       </property>
+       <property name="text">
+        <string>Blur</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="brightButton">
+       <property name="styleSheet">
+        <string notr="true">border-color: rgb(12, 211, 204);
+color: rgb(12, 211, 204);</string>
+       </property>
+       <property name="text">
+        <string>Brightness</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="contrastButton">
+       <property name="styleSheet">
+        <string notr="true">border-color: rgb(12, 211, 204);
+color: rgb(12, 211, 204);</string>
+       </property>
+       <property name="text">
+        <string>Contrast</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="styleSheet">
+        <string notr="true">border-color: rgb(12, 211, 204);
+color: rgb(12, 211, 204);</string>
+       </property>
        <property name="text">
         <string>PushButton</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="styleSheet">
+        <string notr="true">border-color: rgb(12, 211, 204);
+color: rgb(12, 211, 204);</string>
+       </property>
        <property name="text">
         <string>PushButton</string>
        </property>
@@ -66,7 +150,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1133</width>
+     <width>1298</width>
      <height>26</height>
     </rect>
    </property>
