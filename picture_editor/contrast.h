@@ -11,8 +11,12 @@ class Contrast
 {
 public:
     Contrast();
-    int calculateChannel(float size, cv::Mat img, int channel, int i, int j);
-    void calculatePixel(cv::Mat img, cv::Mat helper, int i, int j, float size);
+    int calculateChannel(double size, cv::Mat img, int channel, int i, int j);
+    void calculatePixel(cv::Mat img, cv::Mat helper, int i, int j, int size);
+
+private:
+    double size2;
+
 };
 
 #endif // CONTRAST_H

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
+#include <QSlider>
 #include <iostream>
 
 
@@ -9,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    sliderPlace = ui->sliderLayout;
+    slider = new QSlider(Qt::Horizontal);
 
     connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(open_picture()));
     connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(save_picture()));
@@ -43,9 +45,12 @@ void MainWindow::open_picture()
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                         "C:",
                                                         tr("Images (*.png *.jpg)"));
-    model ->setFileName(fileName);
-    model->load();
-    displayImage(model->getImage());
+    if(!fileName.isEmpty()){
+        model ->setFileName(fileName);
+        model->load();
+        displayImage(model->getImage());
+
+    }
 
 }
 
@@ -63,19 +68,60 @@ void MainWindow::save_picture()
 
 void MainWindow::gaussBlur()
 {
-    model->executeEdit(Model::Functions::GAUSS);
-    displayImage(model->getImage());
+    if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->removeWidget(slider);
+    model->changeFunction(Model::Functions::GAUSS);
+
+    slider->setRange(1,7);
+    slider->setSingleStep(2);
+    slider->setSliderPosition(1);
+
+    ui->sliderLayout->addWidget(slider);
+    connect(slider, SIGNAL(valueChanged(int)), this, SLOT(gaussChange(int)));
+
+}
+
+void MainWindow::gaussChange(int kernel)
+{
+    model->executeEdit(Model::Functions::GAUSS,kernel);
+    displayImage(model->getHelper());
 }
 
 void MainWindow::setBrightness()
 {
-    model->executeEdit(Model::Functions::BRIGHTNESS);
-    displayImage(model->getImage());
+
+    if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->removeWidget(slider);
+    model->changeFunction(Model::Functions::BRIGHTNESS);
+
+
+    slider->setRange(-100,100);
+    slider->setSliderPosition(0);
+
+    ui->sliderLayout->addWidget(slider);
+    connect(slider, SIGNAL(valueChanged(int)), this, SLOT(brightnessChange(int)));
+
+}
+
+void MainWindow::brightnessChange(int size)
+{
+    model->executeEdit(Model::Functions::BRIGHTNESS,size);
+    displayImage(model->getHelper());
 }
 
 void MainWindow::setContrast()
 {
-    model->executeEdit(Model::Functions::CONTRAST);
-    displayImage(model->getImage());
+     if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->removeWidget(slider);
+     model->changeFunction(Model::Functions::CONTRAST);
+
+    slider->setRange(0,30);
+    slider->setSliderPosition(10);
+
+    ui->sliderLayout->addWidget(slider);
+    connect(slider, SIGNAL(valueChanged(int)), this, SLOT(contrastChange(int)));
+}
+
+void MainWindow::contrastChange(int size)
+{
+    model->executeEdit(Model::Functions::CONTRAST,size);
+    displayImage(model->getHelper());
 }
 

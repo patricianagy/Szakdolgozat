@@ -38,6 +38,8 @@ public:
     QPushButton *contrastButton;
     QPushButton *pushButton_3;
     QPushButton *pushButton_2;
+    QWidget *horizontalLayoutWidget_3;
+    QHBoxLayout *sliderLayout;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -122,6 +124,12 @@ public:
 
         horizontalLayout_2->addWidget(pushButton_2);
 
+        horizontalLayoutWidget_3 = new QWidget(centralwidget);
+        horizontalLayoutWidget_3->setObjectName(QString::fromUtf8("horizontalLayoutWidget_3"));
+        horizontalLayoutWidget_3->setGeometry(QRect(340, 699, 651, 41));
+        sliderLayout = new QHBoxLayout(horizontalLayoutWidget_3);
+        sliderLayout->setObjectName(QString::fromUtf8("sliderLayout"));
+        sliderLayout->setContentsMargins(0, 0, 0, 0);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));

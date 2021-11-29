@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <qboxlayout.h>
+#include <qslider.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -22,14 +24,18 @@ public:
 
 private:
     Ui::MainWindow *ui;
-
+    QHBoxLayout *sliderPlace;
+    QSlider *slider;
     Model *model;
 
 private slots:
     void open_picture();
     void save_picture();
     void gaussBlur();
+    void gaussChange(int kernel);
     void setBrightness();
+    void brightnessChange(int size);
     void setContrast();
+    void contrastChange(int size);
 };
 #endif // MAINWINDOW_H

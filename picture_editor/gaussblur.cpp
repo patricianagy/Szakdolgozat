@@ -43,6 +43,9 @@ float GaussBlur::calculateKernel(int kernel, cv::Mat img, int channel, int i, in
    float sum = 0;
    int sumOfKernel=0;
    int kernel2 = (kernel-1)/2;
+
+   if(kernel==1) return img.at<cv::Vec3b>(i, j)[channel];
+
    for (int x = -kernel2; x<=kernel2; ++x ){
        for (int y=-kernel2; y<=kernel2 ; ++y) {
                if( i+x>=0 && i+x<img.rows && j+y>=0 && j+y<img.cols ){

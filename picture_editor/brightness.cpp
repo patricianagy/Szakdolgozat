@@ -6,7 +6,7 @@ Brightness::Brightness()
 
 }
 
-int Brightness::calculateChannel(int size, cv::Mat img, int channel, int i, int j)
+float Brightness::calculateChannel(int size, cv::Mat img, int channel, int i, int j)
 {
     float pixel = img.at<cv::Vec3b>(i, j)[channel];
 

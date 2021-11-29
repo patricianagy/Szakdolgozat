@@ -32,9 +32,11 @@ public:
     QString getFileName();
     void setImage(cv::Mat image);
     cv::Mat getImage();
+    cv::Mat getHelper();
     void load();
     void save(QString name);
-    void executeEdit(Functions function);
+    void executeEdit(Functions function, int size=0);
+    void changeFunction(Functions func);
 
 
 private:
@@ -44,7 +46,8 @@ private:
     Contrast *contrast;
     QString fileName;
     cv::Mat img;
-
+    cv::Mat helper;
+    Functions function;
 };
 
 #endif // MODEL_H

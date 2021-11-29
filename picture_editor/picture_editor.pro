@@ -14,6 +14,7 @@ SOURCES += \
     contrast.cpp \
     dataaccess.cpp \
     gaussblur.cpp \
+    histogramsmoothing.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp
@@ -23,6 +24,7 @@ HEADERS += \
     contrast.h \
     dataaccess.h \
     gaussblur.h \
+    histogramsmoothing.h \
     mainwindow.h \
     model.h
 
