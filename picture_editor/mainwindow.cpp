@@ -11,14 +11,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     sliderPlace = ui->sliderLayout;
-    slider = new QSlider(Qt::Horizontal);
 
-    connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(open_picture()));
-    connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(save_picture()));
+    connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(openPicture()));
+    connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(savePicture()));
+    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancel()));
 
     connect(ui->blurButton, SIGNAL(clicked()), this, SLOT(gaussBlur()));
     connect(ui->brightButton, SIGNAL(clicked()), this, SLOT(setBrightness()));
     connect(ui->contrastButton, SIGNAL(clicked()), this, SLOT(setContrast()));
+    connect(ui->histogramButton, SIGNAL(clicked()), this, SLOT(histogramSmoothing()));
+    connect(ui->rgsButton, SIGNAL(clicked()), this, SLOT(rgs()));
 
     model = new Model();
 
@@ -32,18 +34,22 @@ MainWindow::~MainWindow()
 void MainWindow::displayImage(cv::Mat img)
 {
 
+    int w = ui->displayImage->width();
+    int h = ui->displayImage->height();
     QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
-    ui->displayImage->setPixmap(QPixmap::fromImage(imdisplay));
+    ui->displayImage->setPixmap(QPixmap::fromImage(imdisplay).scaled(w,h,Qt::KeepAspectRatio));
+    ui->displayImage->setAlignment(Qt::AlignCenter);
+
 
 }
 
-void MainWindow::open_picture()
+void MainWindow::openPicture()
 {
     QFileDialog dialog(this);
     dialog.setNameFilter(tr("Images (*.png *.jpg)"));
     dialog.setViewMode(QFileDialog::Detail);
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                        "C:",
+                                                        "",
                                                         tr("Images (*.png *.jpg)"));
     if(!fileName.isEmpty()){
         model ->setFileName(fileName);
@@ -54,50 +60,59 @@ void MainWindow::open_picture()
 
 }
 
-void MainWindow::save_picture()
+void MainWindow::savePicture()
 {
     QFileDialog dialog(this);
     dialog.setNameFilter(tr("Images (*.png *.jpg)"));
     dialog.setViewMode(QFileDialog::Detail);
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                                                        "C:",
+                                                        "",
                                                         tr("Images (*.png *.jpg)"));
 
     model->save(fileName);
 }
 
+void MainWindow::cancel()
+{
+    model->cancel();
+    displayImage(model->getImage());
+}
+
 void MainWindow::gaussBlur()
 {
-    if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->removeWidget(slider);
+    if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->itemAt(0)->widget()->deleteLater();
     model->changeFunction(Model::Functions::GAUSS);
 
+    slider = new QSlider(Qt::Horizontal);
     slider->setRange(1,7);
-    slider->setSingleStep(2);
     slider->setSliderPosition(1);
 
     ui->sliderLayout->addWidget(slider);
     connect(slider, SIGNAL(valueChanged(int)), this, SLOT(gaussChange(int)));
-
+    displayImage(model->getImage());
 }
 
 void MainWindow::gaussChange(int kernel)
 {
-    model->executeEdit(Model::Functions::GAUSS,kernel);
-    displayImage(model->getHelper());
+    if(kernel!=2 && kernel!=4 && kernel!=6){
+        model->executeEdit(Model::Functions::GAUSS,kernel);
+        displayImage(model->getHelper());
+    }
 }
 
 void MainWindow::setBrightness()
 {
 
-    if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->removeWidget(slider);
+    if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->itemAt(0)->widget()->deleteLater();
     model->changeFunction(Model::Functions::BRIGHTNESS);
 
-
+    slider = new QSlider(Qt::Horizontal);
     slider->setRange(-100,100);
     slider->setSliderPosition(0);
 
     ui->sliderLayout->addWidget(slider);
     connect(slider, SIGNAL(valueChanged(int)), this, SLOT(brightnessChange(int)));
+    displayImage(model->getImage());
 
 }
 
@@ -109,19 +124,40 @@ void MainWindow::brightnessChange(int size)
 
 void MainWindow::setContrast()
 {
-     if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->removeWidget(slider);
+
+     if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->itemAt(0)->widget()->deleteLater();
      model->changeFunction(Model::Functions::CONTRAST);
 
+    slider = new QSlider(Qt::Horizontal);
     slider->setRange(0,30);
     slider->setSliderPosition(10);
 
     ui->sliderLayout->addWidget(slider);
     connect(slider, SIGNAL(valueChanged(int)), this, SLOT(contrastChange(int)));
+    displayImage(model->getImage());
 }
 
 void MainWindow::contrastChange(int size)
 {
     model->executeEdit(Model::Functions::CONTRAST,size);
+    displayImage(model->getHelper());
+}
+
+void MainWindow::histogramSmoothing()
+{
+
+    if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->itemAt(0)->widget()->deleteLater();
+    displayImage(model->getImage());
+    model->changeFunction(Model::Functions::HISTOGRAM);
+    model->executeEdit(Model::Functions::HISTOGRAM);
+    displayImage(model->getHelper());
+}
+
+void MainWindow::rgs()
+{
+    if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->itemAt(0)->widget()->deleteLater();
+    model->changeFunction(Model::Functions::RGS);
+    model->executeEdit(Model::Functions::RGS);
     displayImage(model->getHelper());
 }
 

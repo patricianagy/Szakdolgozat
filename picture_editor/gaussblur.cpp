@@ -1,5 +1,6 @@
 #include "gaussblur.h"
 
+
 GaussBlur::GaussBlur()
 {
 
@@ -32,19 +33,20 @@ GaussBlur::GaussBlur()
 void GaussBlur::calculatePixel(cv::Mat img, cv::Mat helper, int i, int j, int kernel)
 {
 
-
    img.at<cv::Vec3b>(i, j)[0] = calculateKernel(kernel,helper, 0, i, j );
    img.at<cv::Vec3b>(i, j)[1] = calculateKernel(kernel, helper, 1, i, j );
    img.at<cv::Vec3b>(i, j)[2] = calculateKernel(kernel, helper, 2, i, j );
 }
 
-float GaussBlur::calculateKernel(int kernel, cv::Mat img, int channel, int i, int j)
+int GaussBlur::calculateKernel(int kernel, cv::Mat img, int channel, int i, int j)
 {
-   float sum = 0;
+
+   if(kernel==1 ||kernel ==0) return img.at<cv::Vec3b>(i, j)[channel];
+
+   int sum = 0;
    int sumOfKernel=0;
    int kernel2 = (kernel-1)/2;
 
-   if(kernel==1) return img.at<cv::Vec3b>(i, j)[channel];
 
    for (int x = -kernel2; x<=kernel2; ++x ){
        for (int y=-kernel2; y<=kernel2 ; ++y) {

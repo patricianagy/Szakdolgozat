@@ -5,6 +5,8 @@
 #include "contrast.h"
 #include "dataaccess.h"
 #include "gaussblur.h"
+#include "histogramsmoothing.h"
+#include "regionbasedsegmentation.h"
 
 
 #include <QString>
@@ -35,19 +37,23 @@ public:
     cv::Mat getHelper();
     void load();
     void save(QString name);
+    void cancel();
     void executeEdit(Functions function, int size=0);
     void changeFunction(Functions func);
 
 
 private:
-    dataAccess *data;
+    DataAccess *data;
     GaussBlur *gaussianBlur;
     Brightness *brightnessSetting;
     Contrast *contrast;
+    HistogramSmoothing *histogram;
+    RegionBasedSegmentation *rgs;
     QString fileName;
     cv::Mat img;
     cv::Mat helper;
     Functions function;
+    QVector<cv::Mat> previousStates;
 };
 
 #endif // MODEL_H

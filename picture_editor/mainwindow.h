@@ -29,13 +29,17 @@ private:
     Model *model;
 
 private slots:
-    void open_picture();
-    void save_picture();
+    void openPicture();
+    void savePicture();
+    void cancel();
     void gaussBlur();
     void gaussChange(int kernel);
     void setBrightness();
     void brightnessChange(int size);
     void setContrast();
     void contrastChange(int size);
+    void histogramSmoothing();
+    void rgs();
+
 };
 #endif // MAINWINDOW_H

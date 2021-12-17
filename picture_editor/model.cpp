@@ -4,12 +4,16 @@
 
 Model::Model()
 {
-    data = new dataAccess();
+    data = new DataAccess();
     gaussianBlur = new GaussBlur();
     brightnessSetting = new Brightness();
     contrast = new Contrast();
+    histogram = new HistogramSmoothing();
+    rgs = new RegionBasedSegmentation();
 
     function=Functions::GAUSS;
+    previousStates.clear();
+
 
 }
 
@@ -25,7 +29,7 @@ QString Model::getFileName()
 
 void Model::setImage(cv::Mat image)
 {
-    img = image;
+    img = image.clone();
 }
 
 cv::Mat Model::getImage()
@@ -40,9 +44,13 @@ cv::Mat Model::getHelper()
 
 void Model::load()
 {
-    img=data->loadPicture(fileName);
+    img=data->loadPicture(fileName).clone();
 
     helper=img.clone();
+    previousStates.clear();
+    cv::Mat first = img.clone();
+    previousStates.push_back(first);
+
 }
 
 void Model::save(QString name)
@@ -50,36 +58,57 @@ void Model::save(QString name)
     data->savePicture(name, img);
 }
 
-void Model::executeEdit(Functions function, int size)
+void Model::cancel()
 {
 
-    helper=img.clone();
-    cv::cvtColor(helper,helper,cv::COLOR_BGR2RGB);
-    for( int i = 0; i < helper.rows; ++i) {
-      for( int j = 0; j < helper.cols; ++j) {
-          switch (function) {
-            case Functions::GAUSS:
-                gaussianBlur->calculatePixel(helper,img,i,j,size);
-                break;
-            case Functions::BRIGHTNESS:
-                brightnessSetting->calculatePixel(helper,img,i,j,size);
-                break;
-            case Functions::CONTRAST:
-                contrast->calculatePixel(helper,img,i,j,size);
-                break;
-            case Functions::HISTOGRAM:
-                break;
-            case Functions::RGS:
-                break;
-            default:
-                std::cout<<"Invalid function";
-                break;
+  img=previousStates.last().clone();
+  if(previousStates.size() != 1){
+      previousStates.removeLast();
+  }
+
+}
+
+void Model::executeEdit(Functions function, int size)
+{
+    if(!img.empty()){
+
+        helper=img.clone();
+        if(function==Functions::HISTOGRAM){
+            histogram->calcHistogram(helper);
+        }
+
+        /*if(function==Functions::RGS){
+            rgs->chooseSeedPoints(helper);
+        }*/
+
+        for( int i = 0; i < helper.rows; ++i) {
+          for( int j = 0; j < helper.cols; ++j) {
+              switch (function) {
+                case Functions::GAUSS:
+                      gaussianBlur->calculatePixel(helper,img,i,j,size);
+                    break;
+                case Functions::BRIGHTNESS:
+                    brightnessSetting->calculatePixel(helper,img,i,j,size);
+                    break;
+                case Functions::CONTRAST:
+                    contrast->calculatePixel(helper,img,i,j,size);
+                    break;
+                case Functions::HISTOGRAM:
+                    histogram->smoothing(helper, i,j);
+                    break;
+                case Functions::RGS:
+
+                    break;
+                default:
+                    std::cout<<"Invalid function ";
+                    break;
+              }
+
+
           }
+        }
 
-
-      }
     }
-
 
 }
 
@@ -88,8 +117,11 @@ void Model::changeFunction(Functions func)
 
     if(function != func){
         img=helper.clone();
+        cv::Mat currentImg= img.clone();
+        previousStates.push_back(currentImg);
     }
     function = func;
+
 
 }
 

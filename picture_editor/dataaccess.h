@@ -6,10 +6,10 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-class dataAccess
+class DataAccess
 {
 public:
-    dataAccess();
+    DataAccess();
     cv::Mat loadPicture(QString fileName);
     void savePicture(QString fileName, cv::Mat img);
 };

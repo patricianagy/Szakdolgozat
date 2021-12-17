@@ -9,7 +9,7 @@ class Brightness
 {
 public:
     Brightness();
-    float calculateChannel(int size, cv::Mat img, int channel, int i, int j);
+    int calculateChannel(int size, cv::Mat img, int channel, int i, int j);
     void calculatePixel(cv::Mat img, cv::Mat helper, int i, int j, int size);
 
 };

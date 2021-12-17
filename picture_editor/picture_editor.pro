@@ -17,7 +17,8 @@ SOURCES += \
     histogramsmoothing.cpp \
     main.cpp \
     mainwindow.cpp \
-    model.cpp
+    model.cpp \
+    regionbasedsegmentation.cpp
 
 HEADERS += \
     brightness.h \
@@ -26,7 +27,8 @@ HEADERS += \
     gaussblur.h \
     histogramsmoothing.h \
     mainwindow.h \
-    model.h
+    model.h \
+    regionbasedsegmentation.h
 
 FORMS += \
     mainwindow.ui

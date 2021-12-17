@@ -22,7 +22,11 @@ void Contrast::calculatePixel(cv::Mat img, cv::Mat helper, int i, int j, int siz
 
     size2=size/10.0;
 
+
+
     img.at<cv::Vec3b>(i, j)[0] = calculateChannel(size2,helper, 0, i, j );
     img.at<cv::Vec3b>(i, j)[1] = calculateChannel(size2, helper, 1, i, j );
     img.at<cv::Vec3b>(i, j)[2] = calculateChannel(size2, helper, 2, i, j );
+
+
 }

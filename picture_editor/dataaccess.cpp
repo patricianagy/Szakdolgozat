@@ -1,12 +1,12 @@
 #include "dataaccess.h"
 #include <iostream>
 
-dataAccess::dataAccess()
+DataAccess::DataAccess()
 {
 
 }
 
-cv::Mat dataAccess::loadPicture(QString fileName)
+cv::Mat DataAccess::loadPicture(QString fileName)
 {
     cv::Mat img = cv::imread(fileName.toStdString());
     cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
@@ -14,7 +14,8 @@ cv::Mat dataAccess::loadPicture(QString fileName)
 
 }
 
-void dataAccess::savePicture(QString fileName, cv::Mat img)
+void DataAccess::savePicture(QString fileName, cv::Mat img)
 {
+    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
     cv::imwrite(fileName.toStdString(),img);
 }

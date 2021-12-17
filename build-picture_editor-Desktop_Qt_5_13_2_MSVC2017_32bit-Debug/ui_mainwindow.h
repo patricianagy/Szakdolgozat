@@ -30,14 +30,14 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *loadButton;
     QPushButton *saveButton;
-    QPushButton *pushButton;
+    QPushButton *cancelButton;
     QWidget *horizontalLayoutWidget_2;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *blurButton;
     QPushButton *brightButton;
     QPushButton *contrastButton;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_2;
+    QPushButton *histogramButton;
+    QPushButton *rgsButton;
     QWidget *horizontalLayoutWidget_3;
     QHBoxLayout *sliderLayout;
     QMenuBar *menubar;
@@ -48,6 +48,8 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(1298, 856);
+        MainWindow->setMinimumSize(QSize(1298, 856));
+        MainWindow->setMaximumSize(QSize(1298, 856));
         MainWindow->setStyleSheet(QString::fromUtf8("\n"
 "background-color: rgb(38, 43, 61);"));
         centralwidget = new QWidget(MainWindow);
@@ -64,7 +66,7 @@ public:
         loadButton = new QPushButton(horizontalLayoutWidget);
         loadButton->setObjectName(QString::fromUtf8("loadButton"));
         loadButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
-"background-color: rgb(71, 99, 107);\n"
+"background-color: rgb(7, 4, 43);\n"
 "color: rgb(12, 211, 204);"));
 
         horizontalLayout->addWidget(loadButton);
@@ -72,16 +74,18 @@ public:
         saveButton = new QPushButton(horizontalLayoutWidget);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
         saveButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"background-color: rgb(7, 4, 43);\n"
 "color: rgb(12, 211, 204);"));
 
         horizontalLayout->addWidget(saveButton);
 
-        pushButton = new QPushButton(horizontalLayoutWidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+        cancelButton = new QPushButton(horizontalLayoutWidget);
+        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"background-color: rgb(7, 4, 43);\n"
 "color: rgb(12, 211, 204);"));
 
-        horizontalLayout->addWidget(pushButton);
+        horizontalLayout->addWidget(cancelButton);
 
         horizontalLayoutWidget_2 = new QWidget(centralwidget);
         horizontalLayoutWidget_2->setObjectName(QString::fromUtf8("horizontalLayoutWidget_2"));
@@ -92,6 +96,7 @@ public:
         blurButton = new QPushButton(horizontalLayoutWidget_2);
         blurButton->setObjectName(QString::fromUtf8("blurButton"));
         blurButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"background-color: rgb(7, 4, 43);\n"
 "color: rgb(12, 211, 204);"));
 
         horizontalLayout_2->addWidget(blurButton);
@@ -99,6 +104,7 @@ public:
         brightButton = new QPushButton(horizontalLayoutWidget_2);
         brightButton->setObjectName(QString::fromUtf8("brightButton"));
         brightButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"background-color: rgb(7, 4, 43);\n"
 "color: rgb(12, 211, 204);"));
 
         horizontalLayout_2->addWidget(brightButton);
@@ -106,23 +112,26 @@ public:
         contrastButton = new QPushButton(horizontalLayoutWidget_2);
         contrastButton->setObjectName(QString::fromUtf8("contrastButton"));
         contrastButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"background-color: rgb(7, 4, 43);\n"
 "color: rgb(12, 211, 204);"));
 
         horizontalLayout_2->addWidget(contrastButton);
 
-        pushButton_3 = new QPushButton(horizontalLayoutWidget_2);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+        histogramButton = new QPushButton(horizontalLayoutWidget_2);
+        histogramButton->setObjectName(QString::fromUtf8("histogramButton"));
+        histogramButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"background-color: rgb(7, 4, 43);\n"
 "color: rgb(12, 211, 204);"));
 
-        horizontalLayout_2->addWidget(pushButton_3);
+        horizontalLayout_2->addWidget(histogramButton);
 
-        pushButton_2 = new QPushButton(horizontalLayoutWidget_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+        rgsButton = new QPushButton(horizontalLayoutWidget_2);
+        rgsButton->setObjectName(QString::fromUtf8("rgsButton"));
+        rgsButton->setStyleSheet(QString::fromUtf8("border-color: rgb(12, 211, 204);\n"
+"background-color: rgb(7, 4, 43);\n"
 "color: rgb(12, 211, 204);"));
 
-        horizontalLayout_2->addWidget(pushButton_2);
+        horizontalLayout_2->addWidget(rgsButton);
 
         horizontalLayoutWidget_3 = new QWidget(centralwidget);
         horizontalLayoutWidget_3->setObjectName(QString::fromUtf8("horizontalLayoutWidget_3"));
@@ -150,12 +159,12 @@ public:
         displayImage->setText(QString());
         loadButton->setText(QCoreApplication::translate("MainWindow", "Open\360\237\223\202", nullptr));
         saveButton->setText(QCoreApplication::translate("MainWindow", "Save\360\237\222\276", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        cancelButton->setText(QCoreApplication::translate("MainWindow", "Undo\342\206\251", nullptr));
         blurButton->setText(QCoreApplication::translate("MainWindow", "Blur", nullptr));
         brightButton->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
         contrastButton->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        histogramButton->setText(QCoreApplication::translate("MainWindow", "Histogram smoothing", nullptr));
+        rgsButton->setText(QCoreApplication::translate("MainWindow", "RGS", nullptr));
     } // retranslateUi
 
 };
