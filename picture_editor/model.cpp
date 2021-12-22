@@ -77,9 +77,9 @@ void Model::executeEdit(Functions function, int size)
             histogram->calcHistogram(helper);
         }
 
-        /*if(function==Functions::RGS){
-            rgs->chooseSeedPoints(helper);
-        }*/
+        if(function==Functions::RGS){
+            rgs->segmentation(img,7);
+        }
 
         for( int i = 0; i < helper.rows; ++i) {
           for( int j = 0; j < helper.cols; ++j) {
@@ -97,7 +97,7 @@ void Model::executeEdit(Functions function, int size)
                     histogram->smoothing(helper, i,j);
                     break;
                 case Functions::RGS:
-
+                    rgs->setValue(helper,img,i,j);
                     break;
                 default:
                     std::cout<<"Invalid function ";
