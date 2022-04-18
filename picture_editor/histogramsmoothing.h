@@ -15,17 +15,16 @@ public:
     void print();
     int findMin(int hist[]);
     int findMax(int hist[]);
-    void normalizeHist( QVector<QPair<int,int>>hist[], int nHist[]);
-    void equalization(int nHist[], QVector<QPair<int,int>>hist[]);
-    int findPixel(int i, int j, QVector<QPair<int,int>>hist[]);
-    void smoothing(cv::Mat img,int i, int j );
+    void normalizeHist( QVector<unsigned char*>hist[], int nHist[]);
+    void equalization(int nHist[], QVector<unsigned char*>hist[]);
+    void clean();
 
 private:
       int pixelCount;
 
-      QVector<QPair<int,int>>histR[256];
-      QVector<QPair<int,int>>histG[256];
-      QVector<QPair<int,int>>histB[256];
+      QVector<unsigned char*>histR[256];
+      QVector<unsigned char*>histG[256];
+      QVector<unsigned char*>histB[256];
 
       int nHistR[256];
       int nHistG[256];

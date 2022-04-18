@@ -25,34 +25,31 @@ HistogramSmoothing::HistogramSmoothing()
 
 void HistogramSmoothing::calcHistogram(cv::Mat img)
 {
-    histB->clear();
-    histG->clear();
-    histR->clear();
 
-    for(int i=0; i<256; i++){
-        nHistB[i] = 0;
-        nHistG[i] = 0;
-        nHistR[i] = 0;
-    }
 
-     QPair<int,int> coordinates;
+
 
     for(int i=0; i<img.rows; i++){
         for(int j=0; j<img.cols; j++){
-            coordinates.first = i;
-            coordinates.second = j;
+
 
             int r= img.at<cv::Vec3b>(i, j)[0]*1;
             int g= img.at<cv::Vec3b>(i, j)[1]*1;
             int b= img.at<cv::Vec3b>(i, j)[2]*1;
 
-            histR[r].push_back(coordinates);
-            histG[g].append(coordinates);
-            histB[b].append(coordinates);
+            unsigned char* rPixel = &img.at<cv::Vec3b>(i, j)[0];
+            unsigned char* gPixel = &img.at<cv::Vec3b>(i, j)[1];
+            unsigned char* bPixel = &img.at<cv::Vec3b>(i, j)[2];
 
+            histR[r].push_back(rPixel);
+            histG[g].push_back(gPixel);
+            histB[b].push_back(bPixel);
             pixelCount++;
         }
     }
+
+
+
 
   normalizeHist(histR,nHistR);
   normalizeHist(histG,nHistG);
@@ -62,13 +59,24 @@ void HistogramSmoothing::calcHistogram(cv::Mat img)
   equalization(nHistG,histG);
   equalization(nHistB,histB);
 
+
+
+  for(int i=0 ; i<256; i++){
+
+      for(int j=0; j<histR[i].size(); j++){
+          *histR[i][j]=(unsigned char)i;
+      }
+      for(int j=0; j<histG[i].size(); j++){
+          *histG[i][j]=(unsigned char)i;
+      }
+      for(int j=0; j<histB[i].size(); j++){
+          *histB[i][j]=(unsigned char)i;
+      }
+  }
+
 }
 
-void HistogramSmoothing::print()
-{
 
-
-}
 
 int HistogramSmoothing::findMin(int hist[])
 {
@@ -84,7 +92,7 @@ int HistogramSmoothing::findMin(int hist[])
 
 
 
-void HistogramSmoothing::normalizeHist( QVector<QPair<int,int>>hist[],  int nHist[])
+void HistogramSmoothing::normalizeHist( QVector<unsigned char*>hist[],  int nHist[])
 {
 
     for(int i=0; i<256; i++){
@@ -97,53 +105,62 @@ void HistogramSmoothing::normalizeHist( QVector<QPair<int,int>>hist[],  int nHis
 
 }
 
-void HistogramSmoothing::equalization(int nHist[] ,QVector<QPair<int,int>>hist[])
+void HistogramSmoothing::equalization(int nHist[] ,QVector<unsigned char*>hist[])
 {
     int equalizedHist[256];
     for(int i=0; i<256; i++){
         equalizedHist[i]=0;
     }
     int min = findMin(nHist);
-    int result;
+    int result=0;
+    double d = pixelCount-min;
 
 
     for(int i=0; i<256; i++) {
-        result = std::round((nHist[i]-min)/(double)(pixelCount-min)*255);
+
+        result = std::round((nHist[i]-min)*255/d);
         equalizedHist[i]= result<0 ? 0 : result;
+
     }
 
     for(int i=0; i<256; i++){
         if(i!=equalizedHist[i]){
-            while(!hist[i].empty()){
+            while(hist[i].size()>0){
                 hist[equalizedHist[i]].append(hist[i].last());
-                hist[i].removeLast();
+                hist[i].pop_back();
             }
         }
+
     }
+
+
 
 }
 
-int HistogramSmoothing::findPixel(int i, int j,QVector<QPair<int,int>>hist[])
-{
 
-    for(int k=0; k<256; k++){
-        if(hist[k].size()!=0){
-            for(int l=0; l<hist[k].size(); l++){
-                if(i==hist[k][l].first && j==hist[k][l].second){
-                    hist[k].remove(l);
-                    return k;
-                }
-            }
-        }
+
+
+
+void HistogramSmoothing::clean()
+{
+    pixelCount=0;
+
+
+
+    for(int i = 0; i<256; i++){
+
+        histR[i].clear();
+        histG[i].clear();
+        histB[i].clear();
+
     }
-    return 0;
-}
 
-void HistogramSmoothing::smoothing(cv::Mat img, int i, int j)
-{
-    img.at<cv::Vec3b>(i, j)[0] = findPixel(i,j,histR);
-    img.at<cv::Vec3b>(i, j)[1] = findPixel(i,j,histG);
-    img.at<cv::Vec3b>(i, j)[2] = findPixel(i,j,histB);
+    for(int i=0; i<256; i++){
+        nHistB[i] = 0;
+        nHistG[i] = 0;
+        nHistR[i] = 0;
+    }
+
 }
 
 

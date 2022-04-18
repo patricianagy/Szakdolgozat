@@ -49,7 +49,7 @@ void MainWindow::openPicture()
     dialog.setNameFilter(tr("Images (*.png *.jpg)"));
     dialog.setViewMode(QFileDialog::Detail);
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                        "",
+                                                        "C:",
                                                         tr("Images (*.png *.jpg)"));
     if(!fileName.isEmpty()){
         model ->setFileName(fileName);
@@ -66,7 +66,7 @@ void MainWindow::savePicture()
     dialog.setNameFilter(tr("Images (*.png *.jpg)"));
     dialog.setViewMode(QFileDialog::Detail);
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                                                        "",
+                                                        "C:",
                                                         tr("Images (*.png *.jpg)"));
 
     model->save(fileName);

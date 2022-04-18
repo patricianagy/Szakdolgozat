@@ -55,7 +55,9 @@ void Model::load()
 
 void Model::save(QString name)
 {
-    data->savePicture(name, img);
+    img=helper.clone();
+    if(name!="") data->savePicture(name, img);
+
 }
 
 void Model::cancel()
@@ -75,10 +77,13 @@ void Model::executeEdit(Functions function, int size)
         helper=img.clone();
         if(function==Functions::HISTOGRAM){
             histogram->calcHistogram(helper);
+            histogram->clean();
+            return;
         }
 
         if(function==Functions::RGS){
-            rgs->segmentation(img,7);
+            rgs->segmentation(helper,img,2);
+            return;
         }
 
         for( int i = 0; i < helper.rows; ++i) {
@@ -93,12 +98,6 @@ void Model::executeEdit(Functions function, int size)
                 case Functions::CONTRAST:
                     contrast->calculatePixel(helper,img,i,j,size);
                     break;
-                case Functions::HISTOGRAM:
-                    histogram->smoothing(helper, i,j);
-                    break;
-                case Functions::RGS:
-                    rgs->setValue(helper,img,i,j);
-                    break;
                 default:
                     std::cout<<"Invalid function ";
                     break;
@@ -107,6 +106,9 @@ void Model::executeEdit(Functions function, int size)
 
           }
         }
+
+
+
 
     }
 

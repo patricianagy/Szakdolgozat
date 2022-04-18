@@ -61,7 +61,7 @@ background-color: rgb(7, 4, 43);
 color: rgb(12, 211, 204);</string>
        </property>
        <property name="text">
-        <string>Open📂</string>
+        <string>Megnyitás📂</string>
        </property>
       </widget>
      </item>
@@ -73,7 +73,7 @@ background-color: rgb(7, 4, 43);
 color: rgb(12, 211, 204);</string>
        </property>
        <property name="text">
-        <string>Save💾</string>
+        <string>Mentés💾</string>
        </property>
       </widget>
      </item>
@@ -85,7 +85,7 @@ background-color: rgb(7, 4, 43);
 color: rgb(12, 211, 204);</string>
        </property>
        <property name="text">
-        <string>Undo↩</string>
+        <string>Visszavonás↩</string>
        </property>
       </widget>
      </item>
@@ -109,7 +109,7 @@ background-color: rgb(7, 4, 43);
 color: rgb(12, 211, 204);</string>
        </property>
        <property name="text">
-        <string>Blur</string>
+        <string>Elmosás</string>
        </property>
       </widget>
      </item>
@@ -121,7 +121,7 @@ background-color: rgb(7, 4, 43);
 color: rgb(12, 211, 204);</string>
        </property>
        <property name="text">
-        <string>Brightness</string>
+        <string>Fényerő</string>
        </property>
       </widget>
      </item>
@@ -133,7 +133,7 @@ background-color: rgb(7, 4, 43);
 color: rgb(12, 211, 204);</string>
        </property>
        <property name="text">
-        <string>Contrast</string>
+        <string>Kontraszt</string>
        </property>
       </widget>
      </item>
@@ -145,7 +145,7 @@ background-color: rgb(7, 4, 43);
 color: rgb(12, 211, 204);</string>
        </property>
        <property name="text">
-        <string>Histogram smoothing</string>
+        <string>Hisztogram kiegyenlítés</string>
        </property>
       </widget>
      </item>
@@ -157,7 +157,7 @@ background-color: rgb(7, 4, 43);
 color: rgb(12, 211, 204);</string>
        </property>
        <property name="text">
-        <string>RGS</string>
+        <string>Szegmentáció</string>
        </property>
       </widget>
      </item>
