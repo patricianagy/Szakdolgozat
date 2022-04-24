@@ -12,9 +12,7 @@ class HistogramSmoothing
 public:
     HistogramSmoothing();
     void calcHistogram(cv::Mat img);
-    void print();
     int findMin(int hist[]);
-    int findMax(int hist[]);
     void normalizeHist( QVector<unsigned char*>hist[], int nHist[]);
     void equalization(int nHist[], QVector<unsigned char*>hist[]);
     void clean();

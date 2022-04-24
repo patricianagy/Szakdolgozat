@@ -9,7 +9,7 @@ RegionBasedSegmentation::RegionBasedSegmentation()
 void RegionBasedSegmentation::chooseSeedPoints(cv::Mat img)
 {
   int rows = img.rows/5;
-  int cols = img.cols/3;
+  int cols = img.cols/4;
   int k=0;
 
 
@@ -17,7 +17,7 @@ void RegionBasedSegmentation::chooseSeedPoints(cv::Mat img)
   std::mt19937 gen(rd());
 
      for(int i=0; i<5; i++){
-         for(int j=0; j<3; j++){
+         for(int j=0; j<4; j++){
 
 
              std::uniform_int_distribution<int> distr(i*rows, ((i+1)*rows)-1);
@@ -40,7 +40,7 @@ void RegionBasedSegmentation::chooseSeedPoints(cv::Mat img)
 
 void RegionBasedSegmentation::initRegions()
 {
-    for(int i=0; i<15; i++){
+    for(int i=0; i<20; i++){
         regions[i].clear();
 
         regions[i].push_back(seedPoints[i]);
@@ -61,7 +61,7 @@ int RegionBasedSegmentation::mean(QVector<QPair<int, int> > region, cv::Mat img,
 
 bool RegionBasedSegmentation::isNotInside( int i, int j)
 {
-    for(int l=0; l<15; l++){
+    for(int l=0; l<20; l++){
         for(int k=0; k<regions[l].size(); k++){
             if(regions[l][k].first==i && regions[l][k].second==j){
                 return false;
@@ -77,7 +77,7 @@ void RegionBasedSegmentation::pixelAggregation(cv::Mat helper,cv::Mat img, int c
 {
     bool notFinished;
     int pixel;
-    for(int i=0; i<15; i++){
+    for(int i=0; i<20; i++){
         notFinished=true;
         pixel = 0;
         while (notFinished) {

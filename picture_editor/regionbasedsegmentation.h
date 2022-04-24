@@ -22,8 +22,8 @@ public:
 
 
 private:
-    QPair<int,int> seedPoints[15];
-    QVector<QPair<int,int>> regions[15];
+    QPair<int,int> seedPoints[20];
+    QVector<QPair<int,int>> regions[20];
 
 
 

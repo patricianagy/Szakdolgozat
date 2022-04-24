@@ -64,6 +64,7 @@ void Model::cancel()
 {
 
   img=previousStates.last().clone();
+  helper=previousStates.last().clone();
   if(previousStates.size() != 1){
       previousStates.removeLast();
   }
@@ -82,7 +83,7 @@ void Model::executeEdit(Functions function, int size)
         }
 
         if(function==Functions::RGS){
-            rgs->segmentation(helper,img,2);
+            rgs->segmentation(helper,img,20);
             return;
         }
 
