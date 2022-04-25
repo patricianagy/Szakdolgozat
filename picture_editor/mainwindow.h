@@ -40,6 +40,7 @@ private slots:
     void contrastChange(int size);
     void histogramSmoothing();
     void rgs();
+    void on_tooBigPicture();
 
 };
 #endif // MAINWINDOW_H

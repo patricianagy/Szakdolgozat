@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QSlider>
 #include <iostream>
 
@@ -23,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->rgsButton, SIGNAL(clicked()), this, SLOT(rgs()));
 
     model = new Model();
+
+    connect(model, SIGNAL(tooBigPicture()),this, SLOT(on_tooBigPicture()));
 
 }
 
@@ -160,4 +163,14 @@ void MainWindow::rgs()
     model->executeEdit(Model::Functions::RGS);
     displayImage(model->getHelper());
 }
+
+void MainWindow::on_tooBigPicture()
+{
+    QMessageBox msg;
+    msg.setWindowTitle("Túl nagy kép");
+    msg.setText("A kép mérete túl nagy ehhez a szűrő használatához. Kérem válasszon egy 120*120 pixelnél kisebb képet!" );
+    msg.exec();
+}
+
+
 

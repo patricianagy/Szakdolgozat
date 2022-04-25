@@ -83,7 +83,9 @@ void Model::executeEdit(Functions function, int size)
         }
 
         if(function==Functions::RGS){
-            rgs->segmentation(helper,img,20);
+            if(notTooBigPicture()){
+                rgs->segmentation(helper,img,20);
+            }
             return;
         }
 
@@ -126,6 +128,16 @@ void Model::changeFunction(Functions func)
     function = func;
 
 
+}
+
+bool Model::notTooBigPicture()
+{
+    if(img.cols<120 && img.rows<120){
+        return true;
+    }else{
+        tooBigPicture();
+        return false;
+    }
 }
 
 

@@ -10,14 +10,17 @@
 
 
 #include <QString>
+#include <QObject>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
 
-class Model
+class Model : public  QObject
 {
+     Q_OBJECT
+
 public:
     Model();
 
@@ -40,7 +43,10 @@ public:
     void cancel();
     void executeEdit(Functions function, int size=0);
     void changeFunction(Functions func);
+    bool notTooBigPicture();
 
+signals:
+    void tooBigPicture();
 
 private:
     DataAccess *data;
