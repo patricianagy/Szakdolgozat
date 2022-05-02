@@ -132,7 +132,7 @@ void MainWindow::setContrast()
      model->changeFunction(Model::Functions::CONTRAST);
 
     slider = new QSlider(Qt::Horizontal);
-    slider->setRange(0,30);
+    slider->setRange(5,25);
     slider->setSliderPosition(10);
 
     ui->sliderLayout->addWidget(slider);
@@ -150,7 +150,7 @@ void MainWindow::histogramSmoothing()
 {
 
     if(!(ui->sliderLayout->isEmpty())) ui->sliderLayout->itemAt(0)->widget()->deleteLater();
-    displayImage(model->getImage());
+    displayImage(model->getImage());    
     model->changeFunction(Model::Functions::HISTOGRAM);
     model->executeEdit(Model::Functions::HISTOGRAM);
     displayImage(model->getHelper());

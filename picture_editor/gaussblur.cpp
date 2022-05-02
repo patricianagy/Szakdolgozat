@@ -32,10 +32,17 @@ GaussBlur::GaussBlur()
 
 void GaussBlur::calculatePixel(cv::Mat img, cv::Mat helper, int i, int j, int kernel)
 {
+    if(i== 0 && j==0){
+        std::cout<<img.at<cv::Vec3b>(i, j)[0]*1<<" ";
+    }
 
    img.at<cv::Vec3b>(i, j)[0] = calculateKernel(kernel,helper, 0, i, j );
    img.at<cv::Vec3b>(i, j)[1] = calculateKernel(kernel, helper, 1, i, j );
    img.at<cv::Vec3b>(i, j)[2] = calculateKernel(kernel, helper, 2, i, j );
+
+   if(i== 0 && j==0){
+       std::cout<<img.at<cv::Vec3b>(i, j)[0]*1;
+   }
 }
 
 int GaussBlur::calculateKernel(int kernel, cv::Mat img, int channel, int i, int j)

@@ -25,19 +25,21 @@ cv::Mat DataAccess::loadPicture(QString fileName)
 
 void DataAccess::savePicture(QString fileName, cv::Mat img)
 {
-    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
-    cv::imwrite(fileName.toStdString(),img);
-    /*std::vector<uchar> buffer;
+    std::vector<uchar> buffer;
     QStringList name = fileName.split(QLatin1Char('.'));
     QString extention = ".";
     extention.append(name[1]);
+    cv::cvtColor(img,img,cv::COLOR_RGB2BGR);
     cv::imencode(extention.toStdString(),img,buffer);
 
-    QFile file(fileName);
-    if (!file.open(QIODevice::WriteOnly)) {
-        std::cout<<"Do not exists";
-        return;
-    }*/
+
+    std::ofstream imgOut(std::wstring(reinterpret_cast<const wchar_t*>(fileName.utf16())), std::ios::out | std::ios::binary);
+    imgOut.write((const char*)&buffer[0], buffer.size());
+
+    imgOut.close();
+
+
+
 
 
 }

@@ -135,7 +135,7 @@ bool Model::notTooBigPicture()
     if(img.cols<120 && img.rows<120){
         return true;
     }else{
-        tooBigPicture();
+        emit tooBigPicture();
         return false;
     }
 }
